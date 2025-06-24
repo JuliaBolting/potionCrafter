@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.juliabolting.potioncrafterapp-mergeDebugResources-2:/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Julia\\.gradle\\caches\\8.11.1\\transforms\\18725f78e19df1de64b811a0b02933fc\\transformed\\material-1.12.0\\res\\values-h320dp-port-v13\\values-h320dp-port-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "63",
+                        "endOffsets": "114"
+                    }
+                }
+            ]
+        }
+    ]
+}

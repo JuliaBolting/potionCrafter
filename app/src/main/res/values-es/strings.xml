@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PotionCrafter</string>
+    <string name="welcome_message">Bienvenido a PotionCrafter</string>
+    <string name="start_button">Comenzar</string>
+    <string name="new_player">Nuevo jugador</string>
+    <string name="player_name">Nombre del jugador</string>
+    <string name="create_potion">Crear poción</string>
+    <string name="ingredient_inventory">Inventario de ingredientes</string>
+    <string name="recipe_book">Libro de recetas</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add_ingredient">Agregar ingrediente</string>
+    <string name="confirm">Confirmar</string>
+    <string name="no_ingredients">Sin ingredientes</string>
+    <string name="poison_warning">¡Advertencia: Poción venenosa!</string>
+    <string name="success_message">¡Poción creada con éxito!</string>
+    <string name="error_message">Error al crear la poción</string>
+    <string name="language">Idioma</string>
+    <string name="invent_rio_de_ingredientes">🧺 Inventario de Ingredientes</string>
+    <string name="text_nada_ingrediente">Aún no has recolectado ningún ingrediente… 😢</string>
+    <string name="comum">común</string>
+    <string name="incomum">poco común</string>
+    <string name="raro">raro</string>
+    <string name="lend_rio">legendario</string>
+    <string name="pico">épico</string>
+    <string name="imagem_do_ingrediente">Imagen del ingrediente</string>
+    <string name="raridade">Rareza: %1$s</string>
+    <string name="digite_um_nome">¡Escribe un nombre!</string>
+    <string name="escolha_at_3_ingredientes">Elige hasta 3 ingredientes:</string>
+    <string name="po_o_criada_com_ingredientes">Poción creada con %1$d ingredientes.</string>
+    <string name="criar_po_o">Crear Poción</string>
+    <string name="fechar">Cerrar</string>
+    <string name="po_o_criada">¡Poción Creada!</string>
+    <string name="sua_po_o_cont_m">Tu poción contiene:\n%1$s</string>
+    <string name="grim_rio_de_receitas">📜 Libro de Recetas</string>
+    <string name="nenhuma_receita_encontrada">✨ No se encontraron recetas.</string>
+    <string name="nenhum_jogador_salvo">¡Ningún jugador guardado!</string>
+    <string name="qual_o_seu_nome_alquimista">🧙‍♂️ ¿Cuál es tu nombre, alquimista?</string>
+    <string name="digite_seu_nome_m_stico">Escribe tu nombre místico…</string>
+    <string name="forjar_destino">⚗️ ¡Forjar Destino!</string>
+    <string name="novo_aventureiro">⚔️ Nuevo Aventurero</string>
+    <string name="continuar_jornada">📜 Continuar Aventura</string>
+</resources>

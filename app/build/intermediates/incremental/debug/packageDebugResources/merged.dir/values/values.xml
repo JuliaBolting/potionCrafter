@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+    <color name="colorOnSecondary">#FF000000</color>
+    <color name="colorPrimary">#FFBB86FC</color>
+    <color name="colorPrimaryVariant">#FF3700B3</color>
+    <color name="colorSecondary">#FF03DAC5</color>
+    <color name="colorSecondaryVariant">#FF018786</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="add_ingredient">Adicionar ingrediente</string>
+    <string name="app_name">PotionCrafter</string>
+    <string name="cancel">Cancelar</string>
+    <string name="comum">comum</string>
+    <string name="confirm">Confirmar</string>
+    <string name="continuar_jornada">📜 Continuar Jornada</string>
+    <string name="create_potion">Criar poção</string>
+    <string name="criar_po_o">Criar Poção</string>
+    <string name="digite_seu_nome_m_stico">Digite seu nome místico…</string>
+    <string name="digite_um_nome">Digite um nome!</string>
+    <string name="error_message">Erro ao criar a poção</string>
+    <string name="escolha_at_3_ingredientes">Escolha até 3 ingredientes:</string>
+    <string name="fechar">Fechar</string>
+    <string name="forjar_destino">⚗️ Forjar Destino!</string>
+    <string name="grim_rio_de_receitas">📜 Grimório de Receitas</string>
+    <string name="imagem_do_ingrediente">Imagem do ingrediente</string>
+    <string name="incomum">incomum</string>
+    <string name="ingredient_inventory">Inventário de ingredientes</string>
+    <string name="invent_rio_de_ingredientes">🧺 Inventário de Ingredientes</string>
+    <string name="language">Idioma</string>
+    <string name="lend_rio">lendário</string>
+    <string name="nenhum_jogador_salvo">Nenhum jogador salvo!</string>
+    <string name="nenhuma_receita_encontrada">✨ Nenhuma receita encontrada.</string>
+    <string name="new_player">Novo jogador</string>
+    <string name="no_ingredients">Sem ingredientes</string>
+    <string name="novo_aventureiro">⚔️ Novo Aventureiro</string>
+    <string name="pico">épico</string>
+    <string name="player_name">Nome do jogador</string>
+    <string name="po_o_criada">Poção Criada!</string>
+    <string name="po_o_criada_com_ingredientes">Poção criada com %1$d ingredientes.</string>
+    <string name="poison_warning">Atenção: Poção venenosa!</string>
+    <string name="qual_o_seu_nome_alquimista">🧙‍♂️ Qual é o seu nome, alquimista?</string>
+    <string name="raridade">Raridade: %1$s</string>
+    <string name="raro">raro</string>
+    <string name="recipe_book">Grimório de receitas</string>
+    <string name="save">Salvar</string>
+    <string name="start_button">Começar</string>
+    <string name="sua_po_o_cont_m">Sua poção contém:\n%1$s</string>
+    <string name="success_message">Poção criada com sucesso!</string>
+    <string name="text_nada_ingrediente">Você ainda não coletou nenhum ingrediente… 😢</string>
+    <string name="welcome_message">Bem-vindo ao PotionCrafter</string>
+    <style name="Theme.PotionCrafterApp" parent="Theme.Material3.DayNight.NoActionBar">
+    
+        <item name="colorPrimary">@color/purple_500</item>
+    </style>
+</resources>
