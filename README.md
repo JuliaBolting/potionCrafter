@@ -30,3 +30,16 @@
 1. Clone este repositório:
    ```bash
    git clone https://github.com/seu-usuario/PotionCrafter.git
+   ```
+2. Abra o projeto no Android Studio.
+3. Conecte um dispositivo físico ou emululador.
+4. Clique em **Run > Run 'app'** para executar o app.
+
+> Obs.: O app requer permissões de armazenamento (para salvar o PDF em dispositivos com Android 10 ou inferior).
+
+## 📌 Funcionalidades Desejadas e Ainda Não Implementadas (ToDo)
+
+- Compartilhar poções entre jogadores.
+- Sistema de ranking baseado em raridade das poções.
+- Modo história ou desafios diários.
+- Nuvem para salvar poções online.
