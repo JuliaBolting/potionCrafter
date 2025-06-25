@@ -29,7 +29,7 @@
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/PotionCrafter.git
+   git clone https://github.com/JuliaBolting/PotionCrafter.git
    ```
 2. Abra o projeto no Android Studio.
 3. Conecte um dispositivo físico ou emululador.
@@ -37,9 +37,18 @@
 
 > Obs.: O app requer permissões de armazenamento (para salvar o PDF em dispositivos com Android 10 ou inferior).
 
-## 📌 Funcionalidades Desejadas e Ainda Não Implementadas (ToDo)
+## 📌 Funcionalidades Desejadas e Ainda Não Implementadas
 
 - Compartilhar poções entre jogadores.
 - Sistema de ranking baseado em raridade das poções.
 - Modo história ou desafios diários.
 - Nuvem para salvar poções online.
+
+## ToDo
+
+- Permitir que o usuário cadastre ingredientes.
+- Permitir poções com mais de 3 ingredientes.
+- Permitir adicionar imagem ou criar uma imagem representando as novas poções.
+- Fazer uma forma de aumentar tornar o ganho de xp mais iterativo.
+- Adicionar alguma lógica na forma de subir level.
+
