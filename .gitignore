@@ -1,0 +1,32 @@
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (SDK path, etc)
+local.properties
+
+# IntelliJ IDEA / Android Studio files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Kotlin build cache
+.kotlinc/
+
+# Logs
+*.log
+
+# Android Studio captures
+captures/
+
+# Misc
+.DS_Store
+*.swp
+*.lock
+
+# Generated files
+out/
+
+# Build generated folders (app/build, etc)
+**/build/
