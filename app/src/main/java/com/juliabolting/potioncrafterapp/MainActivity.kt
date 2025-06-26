@@ -1,6 +1,5 @@
 package com.juliabolting.potioncrafterapp
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -43,10 +42,10 @@ val MedievalFont = FontFamily(Font(R.font.medieval_sharp))
  */
 class MainActivity : ComponentActivity() {
     private val snackbarHostState = SnackbarHostState()
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Obtém o nome do jogador enviado pela activity anterior, ou usa padrão
         val playerName = intent.getStringExtra("player_name") ?: getString(R.string.aventureiro)
         Log.d("PotionCrafter", "playerName: ${playerName}")
 
@@ -54,7 +53,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PotionCrafterAppTheme {
-                // Estado para controlar qual tela está ativa ("main", "inventory", "recipebook")
                 val currentScreen = remember { mutableStateOf("main") }
 
                 Surface(modifier = Modifier.fillMaxSize()) {
@@ -67,14 +65,17 @@ class MainActivity : ComponentActivity() {
                             },
                             onGoToRecipeBook = { currentScreen.value = "recipebook" }
                         )
+
                         "inventory" -> InventoryScreen(
                             onGoBack = { currentScreen.value = "main" }
                         )
+
                         "recipebook" -> RecipeBookScreen(
                             onGoBack = { currentScreen.value = "main" },
                             snackbarHostState = snackbarHostState
                         )
-                        "potion" -> PotionCraftAppScreen (
+
+                        "potion" -> PotionCraftAppScreen(
                             onGoBack = { currentScreen.value = "main" }
 
                         )
@@ -107,7 +108,6 @@ fun MainScreen(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Título centralizado na parte superior
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -134,7 +134,6 @@ fun MainScreen(
             )
         }
 
-        // Animação Lottie entre o label e os botões
         val composition by rememberLottieComposition(LottieCompositionSpec.Asset("potionGIF.json"))
         LottieAnimation(
             composition = composition,
@@ -144,14 +143,12 @@ fun MainScreen(
                 .padding(vertical = 16.dp)
         )
 
-        // Botões na parte inferior
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 48.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Botão para criar nova poção
             Text(
                 text = "Criar Poção",
                 style = MaterialTheme.typography.bodySmall.copy(
@@ -171,7 +168,6 @@ fun MainScreen(
                 Text(stringResource(R.string.criar_nova_po_o))
             }
 
-            // Botão para ver ingredientes
             Text(
                 text = "Inventário",
                 style = MaterialTheme.typography.bodySmall.copy(
@@ -191,7 +187,6 @@ fun MainScreen(
                 Text(stringResource(R.string.ver_ingredientes))
             }
 
-            // Botão para consultar grimório
             Text(
                 text = "Grimório",
                 style = MaterialTheme.typography.bodySmall.copy(

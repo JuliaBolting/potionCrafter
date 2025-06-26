@@ -34,7 +34,6 @@ fun InventoryScreen(onGoBack: () -> Unit) {
 
     var ingredients by remember { mutableStateOf<List<Ingredient>>(emptyList()) }
 
-    // Carrega os ingredientes do banco de dados ao montar o composable
     LaunchedEffect(Unit) {
         ingredients = ingredientDao.getAllIngredients()
         Log.d("PotionCrafter", "Ingredientes carregados: ${ingredients.size}")
@@ -71,7 +70,6 @@ fun InventoryScreen(onGoBack: () -> Unit) {
             }
         }
 
-        // FloatingActionButton no canto inferior direito
         FloatingActionButton(
             onClick = { onGoBack() },
             modifier = Modifier
@@ -140,7 +138,6 @@ fun IngredientCard(ingredient: Ingredient) {
                         .padding(end = 12.dp)
                 )
             } else {
-                // imagem padrão opcional
                 Text(
                     text = "🖼️",
                     modifier = Modifier

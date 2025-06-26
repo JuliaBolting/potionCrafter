@@ -33,7 +33,6 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        // Instancia do banco de dados e DAOs
         db = AppDatabase.getInstance(this)
         playerDao = db.playerDao()
         ingredientDao = db.ingredientDao()
@@ -55,24 +54,20 @@ class WelcomeActivity : AppCompatActivity() {
         titleText.setOnClickListener {
             clickCount++
             if (clickCount == 7) {
-                // Apaga o banco de dados Room
                 deleteDatabase("potioncrafter.db") // substitua pelo nome real do seu banco
 
                 Toast.makeText(this, "Banco de dados resetado!", Toast.LENGTH_SHORT).show()
 
-                // Reinicia a activity para refletir as mudanças
                 val intent = Intent(this, WelcomeActivity::class.java)
                 finish()
                 startActivity(intent)
             }
         }
 
-        // Navega para tela de criação de novo jogador
         btnNewPlayer.setOnClickListener {
             startActivity(Intent(this, NewPlayerActivity::class.java))
         }
 
-        // Continua com o jogador salvo com id 1, se existir
         btnContinue.setOnClickListener {
             lifecycleScope.launch {
                 val sharedPref = getSharedPreferences("prefs", Context.MODE_PRIVATE)

@@ -35,15 +35,14 @@ suspend fun generatePotionReport(
 ) {
     val pdfDocument = PdfDocument()
     val paint = Paint()
-    val pageWidth = 595 // A4 width in points (1/72 inch)
-    val pageHeight = 842 // A4 height in points
+    val pageWidth = 595
+    val pageHeight = 842
     val marginLeft = 60f
-    val maxContentHeight = 750f // Leave space for footer
+    val maxContentHeight = 750f
 
     var y = 50f
     var pageNumber = 1
 
-    // Função para criar nova página
     fun newPage(): PdfDocument.Page {
         val pageInfo = PdfDocument.PageInfo.Builder(pageWidth, pageHeight, pageNumber++).create()
         val page = pdfDocument.startPage(pageInfo)
@@ -51,11 +50,9 @@ suspend fun generatePotionReport(
         return page
     }
 
-    // Cria primeira página
     var page = newPage()
     val canvas = page.canvas
 
-    // --- Cabeçalho ---
     paint.textSize = 18f
     paint.isFakeBoldText = true
     canvas.drawText("📜 Grimório de Poções Criadas", marginLeft, y, paint)
@@ -68,9 +65,13 @@ suspend fun generatePotionReport(
     canvas.drawText("Gerado em: $currentDateTime", marginLeft, y, paint)
     y += 20f
 
-    // Informações do jogador, se disponível
     player?.let {
-        canvas.drawText("Jogador: ${it.name}  |  Nível: ${it.level}  |  XP: ${it.xp}", marginLeft, y, paint)
+        canvas.drawText(
+            "Jogador: ${it.name}  |  Nível: ${it.level}  |  XP: ${it.xp}",
+            marginLeft,
+            y,
+            paint
+        )
         y += 30f
     }
 
@@ -78,7 +79,6 @@ suspend fun generatePotionReport(
     val raridadeCount = mutableMapOf<String, Int>()
 
     for ((index, recipe) in recipes.withIndex()) {
-        // Se ultrapassou o limite vertical, termina a página e inicia uma nova
         if (y > maxContentHeight) {
             pdfDocument.finishPage(page)
             page = newPage()
@@ -99,7 +99,8 @@ suspend fun generatePotionReport(
         for (ingredient in recipe.ingredientes) {
             c.drawText("- ${ingredient.nome} (${ingredient.raridade})", marginLeft + 40f, y, paint)
             y += 16f
-            raridadeCount[ingredient.raridade] = raridadeCount.getOrDefault(ingredient.raridade, 0) + 1
+            raridadeCount[ingredient.raridade] =
+                raridadeCount.getOrDefault(ingredient.raridade, 0) + 1
         }
 
         y += 12f
@@ -107,7 +108,6 @@ suspend fun generatePotionReport(
         y += 20f
     }
 
-    // Gráfico (também pode precisar de nova página)
     if (y > maxContentHeight) {
         pdfDocument.finishPage(page)
         page = newPage()
@@ -133,7 +133,6 @@ suspend fun generatePotionReport(
         y += 25f
     }
 
-    // Rodapé total poções
     if (y > maxContentHeight) {
         pdfDocument.finishPage(page)
         page = newPage()
@@ -142,7 +141,6 @@ suspend fun generatePotionReport(
 
     pdfDocument.finishPage(page)
 
-    // Salva o PDF usando MediaStore
     val fileName = "relatorio_pocoes_${System.currentTimeMillis()}.pdf"
     val contentValues = ContentValues().apply {
         put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
@@ -164,7 +162,8 @@ suspend fun generatePotionReport(
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                Toast.makeText(context, "Erro ao salvar PDF: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Erro ao salvar PDF: ${e.message}", Toast.LENGTH_LONG)
+                    .show()
             }
             Log.e("PotionCrafter", "Erro ao salvar PDF: ${e.message}", e)
         }

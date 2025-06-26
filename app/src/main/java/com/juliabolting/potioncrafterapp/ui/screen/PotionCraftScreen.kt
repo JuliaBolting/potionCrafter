@@ -47,13 +47,13 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
     val recipeDao = db.recipeDao()
     val crossRefDao = db.ingredientRecipeDao()
     val playerDao = db.playerDao()
-    val coroutineScope = rememberCoroutineScope() // Recuperar player_id do SharedPreferences
+    val coroutineScope = rememberCoroutineScope()
     val sharedPref = context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
     val savedPlayerId =
-        sharedPref.getInt("player_id", -1) // Estados para armazenar o player, xp e level
+        sharedPref.getInt("player_id", -1)
     var player by remember { mutableStateOf<Player?>(null) }
-    var xp by remember { mutableStateOf(0) } // Valor padrão inicial
-    var level by remember { mutableStateOf(1) } // Valor padrão inicial // Carrega o player do banco ao iniciar o Composable e atualiza xp e level
+    var xp by remember { mutableStateOf(0) }
+    var level by remember { mutableStateOf(1) }
     LaunchedEffect(savedPlayerId) {
         if (savedPlayerId != -1) {
             try {
@@ -75,24 +75,24 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
             Log.w("PotionCraftAppScreen", "savedPlayerId é -1, nenhum player carregado")
             Toast.makeText(context, "player vazio", Toast.LENGTH_LONG).show()
         }
-    } // Estado dos ingredientes disponíveis no banco
+    }
     var allIngredients by remember { mutableStateOf<List<Ingredient>>(emptyList()) }
-    // Estado dos ingredientes selecionados pelo usuário
     var selectedIngredients by remember { mutableStateOf(setOf<Ingredient>()) }
-    // Estado para controle do diálogo de resultado
-    var showResultDialog by remember { mutableStateOf(false) } // Carrega os ingredientes do banco ao iniciar o Composable
+    var showResultDialog by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         allIngredients = ingredientDao.getAllIngredients()
-    } // Função para atualizar o jogador no banco
+    }
     suspend fun updatePlayer(newXp: Int, newLevel: Int) {
         player?.let { currentPlayer ->
             val updatedPlayer = currentPlayer.copy(xp = newXp, level = newLevel)
             playerDao.update(updatedPlayer)
-            player = updatedPlayer // Atualiza o estado local
+            player = updatedPlayer
             xp = newXp
             level = newLevel
-            Log.d("PotionCraftAppScreen",
-                context.getString(R.string.jogador_atualizado_xp_level, newXp, newLevel))
+            Log.d(
+                "PotionCraftAppScreen",
+                context.getString(R.string.jogador_atualizado_xp_level, newXp, newLevel)
+            )
         }
     }
     Box(modifier = Modifier.fillMaxSize()) {
@@ -101,7 +101,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                 .fillMaxSize()
                 .padding(24.dp)
         ) {
-            // Título com animações
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -117,7 +116,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                     )
                 )
 
-                // Animação de estrelas (XP) com texto ao lado dentro de uma caixinha amarela clarinha
                 Card(
                     modifier = Modifier.padding(end = 8.dp),
                     shape = RoundedCornerShape(16.dp),
@@ -147,7 +145,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                     }
                 }
 
-                // Animação de pódio (Level) com texto ao lado dentro de uma caixinha azul bebê
                 Card(
                     modifier = Modifier,
                     shape = RoundedCornerShape(16.dp),
@@ -178,7 +175,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                 }
             }
 
-            // Label
             Text(
                 text = stringResource(R.string.escolha_at_3_ingredientes),
                 style = MaterialTheme.typography.titleLarge,
@@ -186,7 +182,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            // Lista de ingredientes
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.weight(1f)
@@ -250,16 +245,30 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                                     style = MaterialTheme.typography.titleMedium,
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
-                                // Raridade em letras pequenas com cor específica
                                 Text(
                                     text = ingredient.raridade,
                                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
                                     color = when (ingredient.raridade.lowercase()) {
-                                        stringResource(R.string.raro).lowercase() -> Color(0xFF0000FF)
-                                        stringResource(R.string.pico).lowercase() -> Color(0xFF800080)
-                                        stringResource(R.string.lend_rio).lowercase() -> Color(0xFFFFA500)
-                                        stringResource(R.string.comum).lowercase() -> Color(0xFF808080)
-                                        stringResource(R.string.incomum).lowercase() -> Color(0xFF32CD32)
+                                        stringResource(R.string.raro).lowercase() -> Color(
+                                            0xFF0000FF
+                                        )
+
+                                        stringResource(R.string.pico).lowercase() -> Color(
+                                            0xFF800080
+                                        )
+
+                                        stringResource(R.string.lend_rio).lowercase() -> Color(
+                                            0xFFFFA500
+                                        )
+
+                                        stringResource(R.string.comum).lowercase() -> Color(
+                                            0xFF808080
+                                        )
+
+                                        stringResource(R.string.incomum).lowercase() -> Color(
+                                            0xFF32CD32
+                                        )
+
                                         else -> Color(0xFF808080)
                                     }
                                 )
@@ -283,7 +292,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                 }
             }
 
-            // Botão Criar Poção e Botão de Voltar em uma Row
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -317,7 +325,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                                     )
                                 }
 
-                                // Atualiza XP e Level
                                 var newXp = xp + 5
                                 var newLevel = level
                                 if (newXp >= 10) {
@@ -368,7 +375,6 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
             }
         }
 
-        // Diálogo de resultado
         if (showResultDialog) {
             AlertDialog(
                 onDismissRequest = { showResultDialog = false },

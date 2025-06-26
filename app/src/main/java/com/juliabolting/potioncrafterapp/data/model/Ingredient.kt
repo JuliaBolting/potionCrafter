@@ -17,6 +17,6 @@ data class Ingredient(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val nome: String,
     val descricao: String,
-    val imagem: String, // caminho ou URI da imagem
-    val raridade: String // comum, raro, épico etc.
+    val imagem: String,
+    val raridade: String
 )

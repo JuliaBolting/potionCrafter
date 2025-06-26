@@ -1,7 +1,6 @@
 package com.juliabolting.potioncrafterapp.ui.screen
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
@@ -18,7 +17,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,7 +25,6 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.juliabolting.potioncrafterapp.R
 import com.juliabolting.potioncrafterapp.data.database.AppDatabase
-import com.juliabolting.potioncrafterapp.data.model.Player
 import com.juliabolting.potioncrafterapp.data.model.RecipeWithIngredients
 import kotlinx.coroutines.launch
 
@@ -109,7 +106,10 @@ fun RecipeBookScreen(onGoBack: () -> Unit, snackbarHostState: SnackbarHostState)
             onClick = {
                 Log.d("IconButtonClick", "Button clicked, checking permission")
                 if (hasPermission()) {
-                    Log.d("hasPermission", "Permission already granted or not required, generating PDF")
+                    Log.d(
+                        "hasPermission",
+                        "Permission already granted or not required, generating PDF"
+                    )
                     coroutineScope.launch {
                         val playerDao = db.playerDao()
                         val player = playerDao.getPlayerById(1)

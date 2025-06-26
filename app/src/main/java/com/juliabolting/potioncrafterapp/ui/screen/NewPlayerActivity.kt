@@ -46,15 +46,13 @@ class NewPlayerActivity : AppCompatActivity() {
         val btnStart = findViewById<Button>(R.id.btnCreatePlayer)
         val animText = findViewById<TextView>(R.id.textAnimInter)
 
-        // Animação de rotação infinita no texto animado
         ObjectAnimator.ofFloat(animText, "rotation", 0f, 360f).apply {
-            duration = 4000 // duração 4 segundos
+            duration = 4000
             repeatCount = ObjectAnimator.INFINITE
             interpolator = LinearInterpolator()
             start()
         }
 
-        // Clique do botão para criar novo jogador
         btnStart.setOnClickListener {
             val name = editName.text.toString()
             if (name.isNotBlank()) {
@@ -64,7 +62,6 @@ class NewPlayerActivity : AppCompatActivity() {
                         val playerId = playerDao.insert(newPlayer)
                         Log.d("NewPlayerActivity", "Jogador inserido com ID: $playerId")
 
-                        // Verifica se o jogador foi realmente inserido
                         val insertedPlayer = playerDao.getPlayerById(playerId.toInt())
                         if (insertedPlayer != null) {
                             Log.d("NewPlayerActivity", "Jogador verificado: ${insertedPlayer.name}")
@@ -72,7 +69,6 @@ class NewPlayerActivity : AppCompatActivity() {
                             Log.e("NewPlayerActivity", "Jogador não encontrado após inserção com ID: $playerId")
                         }
 
-                        // Salva o ID no SharedPreferences
                         val sharedPref = getSharedPreferences("prefs", Context.MODE_PRIVATE)
                         with(sharedPref.edit()) {
                             putInt("player_id", playerId.toInt())
@@ -80,8 +76,7 @@ class NewPlayerActivity : AppCompatActivity() {
                         }
                         Log.d("NewPlayerActivity", "player_id salvo: ${playerId.toInt()}")
 
-                        // Vai para a MainActivity
-                        delay(500) // 500ms de atraso
+                        delay(500)
                         val intent = Intent(this@NewPlayerActivity, MainActivity::class.java)
                         intent.putExtra("player_name", name)
                         startActivity(intent)
