@@ -15,8 +15,10 @@ import com.juliabolting.potioncrafterapp.data.model.Player
 import kotlinx.coroutines.launch
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.util.Log
 import android.view.animation.LinearInterpolator
 import android.widget.TextView
+import kotlinx.coroutines.delay
 
 /**
  * Activity para criar um novo jogador.
@@ -45,7 +47,7 @@ class NewPlayerActivity : AppCompatActivity() {
         val animText = findViewById<TextView>(R.id.textAnimInter)
 
         // Animação de rotação infinita no texto animado
-        val rotation = ObjectAnimator.ofFloat(animText, "rotation", 0f, 360f).apply {
+        ObjectAnimator.ofFloat(animText, "rotation", 0f, 360f).apply {
             duration = 4000 // duração 4 segundos
             repeatCount = ObjectAnimator.INFINITE
             interpolator = LinearInterpolator()
@@ -56,19 +58,38 @@ class NewPlayerActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             val name = editName.text.toString()
             if (name.isNotBlank()) {
-                val newPlayer = Player(name = name, level = 1, xp = 0) // não define o ID
+                val newPlayer = Player(name = name, level = 1, xp = 0)
                 lifecycleScope.launch {
-                    val playerId = playerDao.insert(newPlayer) // retorna o ID gerado
+                    try {
+                        val playerId = playerDao.insert(newPlayer)
+                        Log.d("NewPlayerActivity", "Jogador inserido com ID: $playerId")
 
-                    // Salva o ID no SharedPreferences
-                    val sharedPref = getSharedPreferences("prefs", Context.MODE_PRIVATE)
-                    sharedPref.edit().putInt("player_id", playerId.toInt()).apply()
+                        // Verifica se o jogador foi realmente inserido
+                        val insertedPlayer = playerDao.getPlayerById(playerId.toInt())
+                        if (insertedPlayer != null) {
+                            Log.d("NewPlayerActivity", "Jogador verificado: ${insertedPlayer.name}")
+                        } else {
+                            Log.e("NewPlayerActivity", "Jogador não encontrado após inserção com ID: $playerId")
+                        }
 
-                    // Vai para a MainActivity
-                    val intent = Intent(this@NewPlayerActivity, MainActivity::class.java)
-                    intent.putExtra("playerName", name)
-                    startActivity(intent)
-                    finish()
+                        // Salva o ID no SharedPreferences
+                        val sharedPref = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+                        with(sharedPref.edit()) {
+                            putInt("player_id", playerId.toInt())
+                            apply()
+                        }
+                        Log.d("NewPlayerActivity", "player_id salvo: ${playerId.toInt()}")
+
+                        // Vai para a MainActivity
+                        delay(500) // 500ms de atraso
+                        val intent = Intent(this@NewPlayerActivity, MainActivity::class.java)
+                        intent.putExtra("player_name", name)
+                        startActivity(intent)
+                        finish()
+                    } catch (e: Exception) {
+                        Log.e("NewPlayerActivity", "Erro ao inserir jogador: ${e.message}")
+                        Toast.makeText(this@NewPlayerActivity, "Erro ao criar jogador", Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else {
                 Toast.makeText(this, getString(R.string.digite_um_nome), Toast.LENGTH_SHORT).show()

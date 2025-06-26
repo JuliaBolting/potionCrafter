@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -24,7 +27,7 @@ import com.juliabolting.potioncrafterapp.data.model.Ingredient
  * Faz a consulta dos ingredientes no banco de dados e exibe cada um em um cartão.
  */
 @Composable
-fun InventoryScreen() {
+fun InventoryScreen(onGoBack: () -> Unit) {
     val context = LocalContext.current
     val db = remember { AppDatabase.getInstance(context) }
     val ingredientDao = db.ingredientDao()
@@ -37,33 +40,51 @@ fun InventoryScreen() {
         Log.d("PotionCrafter", "Ingredientes carregados: ${ingredients.size}")
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.invent_rio_de_ingredientes),
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(bottom = 20.dp, top = 20.dp),
-        )
-
-        if (ingredients.isEmpty()) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
             Text(
-                stringResource(R.string.text_nada_ingrediente),
-                style = MaterialTheme.typography.bodyLarge
+                text = stringResource(R.string.invent_rio_de_ingredientes),
+                style = MaterialTheme.typography.headlineMedium,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(bottom = 20.dp, top = 20.dp),
             )
-        } else {
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(ingredients.size) { index ->
-                    val ingredient = ingredients[index]
-                    IngredientCard(ingredient)
+
+            if (ingredients.isEmpty()) {
+                Text(
+                    stringResource(R.string.text_nada_ingrediente),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            } else {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(ingredients.size) { index ->
+                        val ingredient = ingredients[index]
+                        IngredientCard(ingredient)
+                    }
                 }
             }
+        }
+
+        // FloatingActionButton no canto inferior direito
+        FloatingActionButton(
+            onClick = { onGoBack() },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp, 45.dp)
+                .size(48.dp),
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Voltar",
+                tint = Color.Black
+            )
         }
     }
 }

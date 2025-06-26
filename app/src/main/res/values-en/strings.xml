@@ -45,6 +45,10 @@
     <string name="o_que_deseja_fazer_na_sua_jornada_alqu_mica">What would you like to do on your alchemical journey?</string>
     <string name="criar_nova_po_o">🔮 Create New Potion</string>
     <string name="ver_ingredientes">🌿 View Ingredients</string>
-    <string name="consultar_grim_rio_de_receitas">📜 Consult Recipe Book</string>
+    <string name="consultar_grim_rio_de_receitas">📜 Consult Grimoire of Recipes</string>
+    <string name="jogador_atualizado_xp_level">Player updated: XP=%1$d, Level=%2$d</string>
+    <string name="selecione_ingredientes_ou_crie_um_jogador">Select ingredients or create a player!</string>
+    <string name="parab_ns_subiu_para_level">Congratulations! Leveled up to Level %1$d!</string>
+    <string name="ingredientes">Ingredients: %1$s</string>
 
 </resources>

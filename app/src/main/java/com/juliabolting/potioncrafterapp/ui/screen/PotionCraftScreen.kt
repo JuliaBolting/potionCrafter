@@ -1,7 +1,8 @@
-package com.juliabolting.potioncrafterapp.ui.screen
+package com.juliabolting.potioncrafterapp.ui.screenimport
 
 import android.content.Context
-import android.content.Intent
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -29,15 +30,14 @@ import com.juliabolting.potioncrafterapp.R
 import com.juliabolting.potioncrafterapp.data.database.AppDatabase
 import com.juliabolting.potioncrafterapp.data.model.Ingredient
 import com.juliabolting.potioncrafterapp.data.model.IngredienteReceitaCrossRef
-import com.juliabolting.potioncrafterapp.data.model.Potion
+import com.juliabolting.potioncrafterapp.data.model.Player
 import com.juliabolting.potioncrafterapp.data.model.Recipe
 import kotlinx.coroutines.launch
 
-/**
- * Composable que exibe a tela para criação de poções com seleção de ingredientes,
- * incluindo animações de nível e experiência, e um botão para criar a poção.
- *
- * @param onGoBack Callback para voltar à tela principal.
+/**Composable que exibe a tela para criação de poções com seleção de ingredientes,
+incluindo animações de nível e experiência, e um botão para criar a poção.
+
+@param onGoBack Callback para voltar à tela principal.
  */
 @Composable
 fun PotionCraftAppScreen(onGoBack: () -> Unit) {
@@ -46,30 +46,55 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
     val ingredientDao = db.ingredientDao()
     val recipeDao = db.recipeDao()
     val crossRefDao = db.ingredientRecipeDao()
-    val coroutineScope = rememberCoroutineScope()
-
-    // Recuperar player_id do SharedPreferences
+    val playerDao = db.playerDao()
+    val coroutineScope = rememberCoroutineScope() // Recuperar player_id do SharedPreferences
     val sharedPref = context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
-    val savedPlayerId = sharedPref.getInt("player_id", -1)
-
-    // Estado dos ingredientes disponíveis no banco
+    val savedPlayerId =
+        sharedPref.getInt("player_id", -1) // Estados para armazenar o player, xp e level
+    var player by remember { mutableStateOf<Player?>(null) }
+    var xp by remember { mutableStateOf(0) } // Valor padrão inicial
+    var level by remember { mutableStateOf(1) } // Valor padrão inicial // Carrega o player do banco ao iniciar o Composable e atualiza xp e level
+    LaunchedEffect(savedPlayerId) {
+        if (savedPlayerId != -1) {
+            try {
+                player = playerDao.getPlayerById(savedPlayerId)
+                Log.d("PotionCraftAppScreen", "Player recuperado: $player")
+                if (player != null) {
+                    xp = player!!.xp
+                    level = player!!.level
+                } else {
+                    Log.w(
+                        "PotionCraftAppScreen",
+                        "Nenhum player encontrado para ID: $savedPlayerId"
+                    )
+                }
+            } catch (e: Exception) {
+                Log.e("PotionCraftAppScreen", "Erro ao buscar player: ${e.message}")
+            }
+        } else {
+            Log.w("PotionCraftAppScreen", "savedPlayerId é -1, nenhum player carregado")
+            Toast.makeText(context, "player vazio", Toast.LENGTH_LONG).show()
+        }
+    } // Estado dos ingredientes disponíveis no banco
     var allIngredients by remember { mutableStateOf<List<Ingredient>>(emptyList()) }
     // Estado dos ingredientes selecionados pelo usuário
     var selectedIngredients by remember { mutableStateOf(setOf<Ingredient>()) }
     // Estado para controle do diálogo de resultado
-    var showResultDialog by remember { mutableStateOf(false) }
-
-    // Carrega os ingredientes do banco ao iniciar o Composable
+    var showResultDialog by remember { mutableStateOf(false) } // Carrega os ingredientes do banco ao iniciar o Composable
     LaunchedEffect(Unit) {
         allIngredients = ingredientDao.getAllIngredients()
+    } // Função para atualizar o jogador no banco
+    suspend fun updatePlayer(newXp: Int, newLevel: Int) {
+        player?.let { currentPlayer ->
+            val updatedPlayer = currentPlayer.copy(xp = newXp, level = newLevel)
+            playerDao.update(updatedPlayer)
+            player = updatedPlayer // Atualiza o estado local
+            xp = newXp
+            level = newLevel
+            Log.d("PotionCraftAppScreen",
+                context.getString(R.string.jogador_atualizado_xp_level, newXp, newLevel))
+        }
     }
-
-    // Lógica fictícia para obter XP e Level (substitua pela sua implementação real)
-    val xp = remember { mutableStateOf(100) } // Exemplo, ajuste com base no player_id
-    val level = remember { mutableStateOf(5) } // Exemplo, ajuste com base no player_id
-    // Exemplo: Se você tem uma função para buscar XP/Level no banco ou SharedPreferences
-    // LaunchedEffect(savedPlayerId) { xp.value = getXPFromDatabase(savedPlayerId) }
-
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
@@ -80,7 +105,7 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 32.dp, bottom = 16.dp), // Reduzido o padding superior
+                    .padding(top = 32.dp, bottom = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -103,16 +128,20 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(2.dp)
                     ) {
-                        val starComposition by rememberLottieComposition(LottieCompositionSpec.Asset("starGIF.json"))
+                        val starComposition by rememberLottieComposition(
+                            LottieCompositionSpec.Asset(
+                                "starGIF.json"
+                            )
+                        )
                         LottieAnimation(
                             composition = starComposition,
                             iterations = LottieConstants.IterateForever,
                             modifier = Modifier.size(40.dp)
                         )
                         Text(
-                            text = "XP ${xp.value}",
+                            text = "XP $xp",
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.surface,
+                            color = Color.Black,
                             modifier = Modifier.padding(start = 4.dp)
                         )
                     }
@@ -121,24 +150,28 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                 // Animação de pódio (Level) com texto ao lado dentro de uma caixinha azul bebê
                 Card(
                     modifier = Modifier,
-                    shape = RoundedCornerShape(16.dp), // Mais redondo
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFE3F2FD)), // Azul bebê
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp) // Reduzido
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFE3F2FD)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(2.dp) // Mais rente ao texto
+                        modifier = Modifier.padding(2.dp)
                     ) {
-                        val podiumComposition by rememberLottieComposition(LottieCompositionSpec.Asset("podiumGIF.json"))
+                        val podiumComposition by rememberLottieComposition(
+                            LottieCompositionSpec.Asset(
+                                "trophyGIF.json"
+                            )
+                        )
                         LottieAnimation(
                             composition = podiumComposition,
                             iterations = LottieConstants.IterateForever,
                             modifier = Modifier.size(40.dp)
                         )
                         Text(
-                            text = "Level ${level.value}",
+                            text = "Level $level",
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.surface, // Cor de fundo da tela
+                            color = Color.Black,
                             modifier = Modifier.padding(start = 4.dp)
                         )
                     }
@@ -191,7 +224,11 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                         ) {
                             val context = LocalContext.current
                             val imageId = remember(ingredient.imagem) {
-                                context.resources.getIdentifier(ingredient.imagem, "drawable", context.packageName)
+                                context.resources.getIdentifier(
+                                    ingredient.imagem,
+                                    "drawable",
+                                    context.packageName
+                                )
                             }
 
                             if (imageId != 0) {
@@ -204,7 +241,7 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                                         .size(40.dp)
                                 )
                             }
-                            Column (
+                            Column(
                                 modifier = Modifier.weight(1f),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
@@ -215,15 +252,15 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                                 )
                                 // Raridade em letras pequenas com cor específica
                                 Text(
-                                    text = ingredient.raridade ?: "Comum", // Substitua 'raridade' pelo campo correto
+                                    text = ingredient.raridade,
                                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
-                                    color = when (ingredient.raridade?.lowercase()) {
-                                        "raro" -> Color(0xFF0000FF) // Azul
-                                        "épico" -> Color(0xFF800080) // Roxo
-                                        "lendário" -> Color(0xFFFFA500) // Laranja
-                                        "comum" -> Color(0xFF808080) // Cinza
-                                        "incomum" -> Color(0xFF32CD32) // Verde
-                                        else -> Color(0xFF808080) // Padrão: Cinza
+                                    color = when (ingredient.raridade.lowercase()) {
+                                        stringResource(R.string.raro).lowercase() -> Color(0xFF0000FF)
+                                        stringResource(R.string.pico).lowercase() -> Color(0xFF800080)
+                                        stringResource(R.string.lend_rio).lowercase() -> Color(0xFFFFA500)
+                                        stringResource(R.string.comum).lowercase() -> Color(0xFF808080)
+                                        stringResource(R.string.incomum).lowercase() -> Color(0xFF32CD32)
+                                        else -> Color(0xFF808080)
                                     }
                                 )
                             }
@@ -248,36 +285,63 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
 
             // Botão Criar Poção e Botão de Voltar em uma Row
             Row(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 20.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Button(
                     onClick = {
                         coroutineScope.launch {
-                            val ingredientes = selectedIngredients.toList()
-                            val nomeReceita = ingredientes.joinToString(" + ") { it.nome }
+                            if (selectedIngredients.isNotEmpty() && player != null) {
+                                val ingredientes = selectedIngredients.toList()
+                                val nomeReceita = ingredientes.joinToString(" + ") { it.nome }
 
-                            val recipe = Recipe(
-                                nome = nomeReceita,
-                                descricao = context.getString(
-                                    R.string.po_o_criada_com_ingredientes,
-                                    ingredientes.size
-                                ),
-                                resultado = nomeReceita
-                            )
-                            val recipeIdLong = recipeDao.insert(recipe).toString()
-                            val recipeId = recipeIdLong.toInt()
-
-                            ingredientes.forEach {
-                                crossRefDao.insert(
-                                    IngredienteReceitaCrossRef(
-                                        receitaId = recipeId,
-                                        ingredienteId = it.id
-                                    )
+                                val recipe = Recipe(
+                                    nome = nomeReceita,
+                                    descricao = context.getString(
+                                        R.string.po_o_criada_com_ingredientes,
+                                        ingredientes.size
+                                    ),
+                                    resultado = nomeReceita
                                 )
-                            }
+                                val recipeIdLong = recipeDao.insert(recipe).toString()
+                                val recipeId = recipeIdLong.toInt()
 
-                            showResultDialog = true
+                                ingredientes.forEach {
+                                    crossRefDao.insert(
+                                        IngredienteReceitaCrossRef(
+                                            receitaId = recipeId,
+                                            ingredienteId = it.id
+                                        )
+                                    )
+                                }
+
+                                // Atualiza XP e Level
+                                var newXp = xp + 5
+                                var newLevel = level
+                                if (newXp >= 10) {
+                                    newXp = 0
+                                    newLevel += 1
+                                    Toast.makeText(
+                                        context,
+                                        context.getString(
+                                            R.string.parab_ns_subiu_para_level,
+                                            newLevel
+                                        ),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                updatePlayer(newXp, newLevel)
+
+                                showResultDialog = true
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    context.getString(R.string.selecione_ingredientes_ou_crie_um_jogador),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     },
                     enabled = selectedIngredients.isNotEmpty(),
@@ -316,12 +380,16 @@ fun PotionCraftAppScreen(onGoBack: () -> Unit) {
                 title = { Text(stringResource(R.string.po_o_criada)) },
                 text = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        val cauldronComposition by rememberLottieComposition(LottieCompositionSpec.Asset("cauldronGIF.json"))
+                        val cauldronComposition by rememberLottieComposition(
+                            LottieCompositionSpec.Asset(
+                                "cauldronGIF.json"
+                            )
+                        )
                         LottieAnimation(
                             composition = cauldronComposition,
                             iterations = LottieConstants.IterateForever,
                             modifier = Modifier
-                                .size(80.dp) // Ajuste o tamanho conforme necessário
+                                .size(80.dp)
                                 .padding(end = 16.dp)
                         )
                         Text(

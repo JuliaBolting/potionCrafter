@@ -91,7 +91,6 @@ abstract class AppDatabase : RoomDatabase() {
                             }
                         }
                     })
-                    .fallbackToDestructiveMigration()
                     .build()
                     .also { INSTANCE = it }
             }

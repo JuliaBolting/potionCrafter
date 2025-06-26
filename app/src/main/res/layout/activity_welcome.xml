@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/caldeirao_pocao"
     android:gravity="center"
-    android:padding="32dp"
-    android:background="@drawable/bg_potion">
+    android:orientation="vertical"
+    android:padding="32dp">
 
     <TextView
         android:id="@+id/txtTitleWelcome"
@@ -17,12 +16,12 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/medieval_sharp"
         android:shadowColor="#88000000"
-        android:shadowDx="2"
+        android:shadowDx="8"
         android:shadowDy="2"
-        android:shadowRadius="4"
+        android:shadowRadius="1"
         android:text="PotionCrafter"
         android:textAlignment="center"
-        android:textColor="#673AB7"
+        android:textColor="#FDD222"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

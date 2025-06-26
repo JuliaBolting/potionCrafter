@@ -1,45 +1,52 @@
+package com.juliabolting.potioncrafterapp.ui.screen
+
+import android.content.ContentValues
 import android.content.Context
-import android.os.Environment
 import android.graphics.pdf.PdfDocument
 import android.graphics.Paint
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import com.juliabolting.potioncrafterapp.data.model.Player
 import com.juliabolting.potioncrafterapp.data.model.RecipeWithIngredients
-import java.io.File
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Gera um relatório em PDF listando as poções criadas, seus ingredientes e um gráfico
  * de barras mostrando a contagem de ingredientes por raridade.
  *
- * O PDF é salvo na pasta de downloads do dispositivo.
+ * O PDF é salvo na pasta de downloads do dispositivo usando MediaStore.
  *
  * @param context Contexto da aplicação para acesso a recursos e diretórios
+ * @param player Jogador atual (opcional)
  * @param recipes Lista de [RecipeWithIngredients] para gerar o relatório
  */
-import com.juliabolting.potioncrafterapp.data.model.Player
-
-fun generatePotionReport(
+@RequiresApi(Build.VERSION_CODES.Q)
+suspend fun generatePotionReport(
     context: Context,
     player: Player?,
     recipes: List<RecipeWithIngredients>
 ) {
     val pdfDocument = PdfDocument()
     val paint = Paint()
-    val pageWidth = 595
-    val pageHeight = 842
+    val pageWidth = 595 // A4 width in points (1/72 inch)
+    val pageHeight = 842 // A4 height in points
     val marginLeft = 60f
-    val maxContentHeight = 750f // deixa espaço no rodapé
+    val maxContentHeight = 750f // Leave space for footer
 
     var y = 50f
     var pageNumber = 1
 
-    // Função para criar página nova
+    // Função para criar nova página
     fun newPage(): PdfDocument.Page {
         val pageInfo = PdfDocument.PageInfo.Builder(pageWidth, pageHeight, pageNumber++).create()
         val page = pdfDocument.startPage(pageInfo)
-        val canvas = page.canvas
         y = 50f
         return page
     }
@@ -126,7 +133,7 @@ fun generatePotionReport(
         y += 25f
     }
 
-    // Rodapé total poções (se ultrapassou a página, cria nova)
+    // Rodapé total poções
     if (y > maxContentHeight) {
         pdfDocument.finishPage(page)
         page = newPage()
@@ -135,16 +142,38 @@ fun generatePotionReport(
 
     pdfDocument.finishPage(page)
 
-    val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-    val file = File(downloadsDir, "relatorio_pocoes.pdf")
-
-    try {
-        pdfDocument.writeTo(FileOutputStream(file))
-        Toast.makeText(context, "PDF salvo em: ${file.absolutePath}", Toast.LENGTH_LONG).show()
-    } catch (e: Exception) {
-        e.printStackTrace()
-        Toast.makeText(context, "Erro ao salvar PDF", Toast.LENGTH_LONG).show()
-    } finally {
-        pdfDocument.close()
+    // Salva o PDF usando MediaStore
+    val fileName = "relatorio_pocoes_${System.currentTimeMillis()}.pdf"
+    val contentValues = ContentValues().apply {
+        put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+        put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
+        put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
     }
+
+    val resolver = context.contentResolver
+    val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+
+    if (uri != null) {
+        try {
+            resolver.openOutputStream(uri)?.use { outputStream ->
+                pdfDocument.writeTo(outputStream)
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "PDF salvo em: $uri", Toast.LENGTH_LONG).show()
+                }
+                Log.d("PotionCrafter", "PDF salvo em: $uri")
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(context, "Erro ao salvar PDF: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+            Log.e("PotionCrafter", "Erro ao salvar PDF: ${e.message}", e)
+        }
+    } else {
+        withContext(Dispatchers.Main) {
+            Toast.makeText(context, "Falha ao criar URI para o PDF", Toast.LENGTH_LONG).show()
+        }
+        Log.e("PotionCrafter", "Falha ao criar URI para o PDF")
+    }
+
+    pdfDocument.close()
 }

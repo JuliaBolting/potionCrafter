@@ -56,7 +56,7 @@ class WelcomeActivity : AppCompatActivity() {
             clickCount++
             if (clickCount == 7) {
                 // Apaga o banco de dados Room
-                deleteDatabase("potioncrafter-db") // substitua pelo nome real do seu banco
+                deleteDatabase("potioncrafter.db") // substitua pelo nome real do seu banco
 
                 Toast.makeText(this, "Banco de dados resetado!", Toast.LENGTH_SHORT).show()
 

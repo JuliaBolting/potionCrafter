@@ -1,12 +1,13 @@
 package com.juliabolting.potioncrafterapp
 
-import RecipeBookScreen
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -26,8 +27,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.juliabolting.potioncrafterapp.ui.screen.InventoryScreen
-import com.juliabolting.potioncrafterapp.ui.screen.PotionCraftActivity
-import com.juliabolting.potioncrafterapp.ui.screen.PotionCraftAppScreen
+import com.juliabolting.potioncrafterapp.ui.screen.RecipeBookScreen
+import com.juliabolting.potioncrafterapp.ui.screenimport.PotionCraftAppScreen
 import com.juliabolting.potioncrafterapp.ui.theme.PotionCrafterAppTheme
 
 val MedievalFont = FontFamily(Font(R.font.medieval_sharp))
@@ -41,6 +42,8 @@ val MedievalFont = FontFamily(Font(R.font.medieval_sharp))
  * Recebe o nome do jogador via Intent, exibindo uma saudação personalizada.
  */
 class MainActivity : ComponentActivity() {
+    private val snackbarHostState = SnackbarHostState()
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Obtém o nome do jogador enviado pela activity anterior, ou usa padrão
@@ -64,12 +67,16 @@ class MainActivity : ComponentActivity() {
                             },
                             onGoToRecipeBook = { currentScreen.value = "recipebook" }
                         )
-                        "inventory" -> InventoryScreen()
-                        "recipebook" -> RecipeBookScreen(
+                        "inventory" -> InventoryScreen(
                             onGoBack = { currentScreen.value = "main" }
+                        )
+                        "recipebook" -> RecipeBookScreen(
+                            onGoBack = { currentScreen.value = "main" },
+                            snackbarHostState = snackbarHostState
                         )
                         "potion" -> PotionCraftAppScreen (
                             onGoBack = { currentScreen.value = "main" }
+
                         )
                     }
                 }
@@ -91,7 +98,7 @@ fun MainScreen(
     playerName: String,
     onGoToInventory: () -> Unit,
     onGoToPotionCraft: () -> Unit,
-    onGoToRecipeBook: () -> Unit,
+    onGoToRecipeBook: () -> Unit
 ) {
     Column(
         modifier = Modifier

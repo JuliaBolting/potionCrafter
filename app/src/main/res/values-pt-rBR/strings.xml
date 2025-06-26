@@ -47,5 +47,8 @@
     <string name="criar_nova_po_o">🔮 Criar Nova Poção</string>
     <string name="ver_ingredientes">🌿 Ver Ingredientes</string>
     <string name="consultar_grim_rio_de_receitas">📜 Consultar Grimório de Receitas</string>
+    <string name="jogador_atualizado_xp_level">Jogador atualizado: XP=%1$d, Level=%2$d</string>
+    <string name="selecione_ingredientes_ou_crie_um_jogador">Selecione ingredientes ou crie um jogador!</string>
+    <string name="parab_ns_subiu_para_level">Parabéns! Subiu para Level %1$d!</string>
 
 </resources>

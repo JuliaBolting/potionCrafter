@@ -1,4 +1,13 @@
-import android.content.Intent
+package com.juliabolting.potioncrafterapp.ui.screen
+
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,48 +24,107 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import com.juliabolting.potioncrafterapp.MainActivity
+import androidx.core.content.ContextCompat
 import com.juliabolting.potioncrafterapp.R
 import com.juliabolting.potioncrafterapp.data.database.AppDatabase
+import com.juliabolting.potioncrafterapp.data.model.Player
 import com.juliabolting.potioncrafterapp.data.model.RecipeWithIngredients
 import kotlinx.coroutines.launch
 
 /**
  * Composable que exibe o Grimório de Receitas, listando as receitas com seus
  * ingredientes e descrições. Inclui botão para baixar o relatório em PDF.
- *
- * O relatório é gerado ao clicar no ícone de download, chamando a função
- * [generatePotionReport] para criar um PDF com todas as receitas e seus ingredientes.
  */
 @Composable
-fun RecipeBookScreen(onGoBack: () -> Unit) {
+@RequiresApi(Build.VERSION_CODES.Q)
+fun RecipeBookScreen(onGoBack: () -> Unit, snackbarHostState: SnackbarHostState) {
     val context = LocalContext.current
+    Log.d("RecipeBookScreen", "Context class: ${context.javaClass.simpleName}")
+
     val db = remember { AppDatabase.getInstance(context) }
     val recipeDao = db.recipeDao()
 
-    // Estado que guarda a lista de receitas com ingredientes
     var recipes by remember { mutableStateOf<List<RecipeWithIngredients>>(emptyList()) }
 
-    // Carrega as receitas do banco ao iniciar o Composable
     LaunchedEffect(Unit) {
         recipes = recipeDao.getAllRecipesWithIngredients()
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        // Coroutine para ações assíncronas
-        val coroutineScope = rememberCoroutineScope()
+    val permission = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    } else {
+        null
+    }
 
-        // Botão no topo direito para gerar e baixar o relatório PDF
+    val coroutineScope = rememberCoroutineScope()
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        Log.d("PermissionResult", "Permission granted: $isGranted")
+        if (isGranted || permission == null) {
+            coroutineScope.launch {
+                val playerDao = db.playerDao()
+                val player = playerDao.getPlayerById(1)
+                val recipesList = recipeDao.getAllRecipesWithIngredients()
+                generatePotionReport(context, player, recipesList)
+                snackbarHostState.showSnackbar(
+                    message = "PDF gerado com sucesso!",
+                    actionLabel = null,
+                    withDismissAction = false,
+                    duration = SnackbarDuration.Short
+                )
+            }
+        } else {
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(
+                    message = "Permissão negada. O PDF não pode ser gerado.",
+                    actionLabel = null,
+                    withDismissAction = false,
+                    duration = SnackbarDuration.Short
+                )
+            }
+        }
+    }
+
+    fun requestStoragePermission() {
+        permission?.let {
+            Log.d("RequestPermission", "Launching permission request for: $it")
+            permissionLauncher.launch(it)
+        } ?: run {
+            Log.d("RequestPermission", "No permission required for this Android version")
+        }
+    }
+
+    fun hasPermission(): Boolean {
+        val result = permission?.let {
+            ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+        } ?: true
+        Log.d("HasPermission", "Permission check result: $result")
+        return result
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
         IconButton(
             onClick = {
-                coroutineScope.launch {
-                    val playerDao = db.playerDao()
-                    val player = playerDao.getPlayerById(1)
-                    val recipes = recipeDao.getAllRecipesWithIngredients()
-                    generatePotionReport(context, player, recipes)
+                Log.d("IconButtonClick", "Button clicked, checking permission")
+                if (hasPermission()) {
+                    Log.d("hasPermission", "Permission already granted or not required, generating PDF")
+                    coroutineScope.launch {
+                        val playerDao = db.playerDao()
+                        val player = playerDao.getPlayerById(1)
+                        val recipesList = recipeDao.getAllRecipesWithIngredients()
+                        generatePotionReport(context, player, recipesList)
+                        snackbarHostState.showSnackbar(
+                            message = "PDF gerado com sucesso!",
+                            actionLabel = null,
+                            withDismissAction = false,
+                            duration = SnackbarDuration.Short
+                        )
+                    }
+                } else {
+                    Log.d("requestStoragePermission", "Requesting permission")
+                    requestStoragePermission()
                 }
             },
             modifier = Modifier
@@ -74,7 +142,6 @@ fun RecipeBookScreen(onGoBack: () -> Unit) {
                 .fillMaxSize()
                 .padding(24.dp)
         ) {
-            // Título da tela
             Text(
                 text = stringResource(R.string.grim_rio_de_receitas),
                 style = MaterialTheme.typography.headlineLarge.copy(
@@ -87,7 +154,6 @@ fun RecipeBookScreen(onGoBack: () -> Unit) {
                     .padding(top = 64.dp, bottom = 24.dp)
             )
 
-            // Caso não haja receitas cadastradas
             if (recipes.isEmpty()) {
                 Text(
                     text = stringResource(R.string.nenhuma_receita_encontrada),
@@ -95,7 +161,6 @@ fun RecipeBookScreen(onGoBack: () -> Unit) {
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             } else {
-                // Lista de receitas com seus detalhes
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxSize()
@@ -121,7 +186,10 @@ fun RecipeBookScreen(onGoBack: () -> Unit) {
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(
-                                    text = "Ingredientes: ${recipe.ingredientes.joinToString { it.nome }}",
+                                    text = stringResource(
+                                        R.string.ingredientes,
+                                        recipe.ingredientes.joinToString { it.nome }
+                                    ),
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.secondary
                                 )
@@ -132,12 +200,11 @@ fun RecipeBookScreen(onGoBack: () -> Unit) {
             }
         }
 
-        // FloatingActionButton para voltar à MainActivity
         FloatingActionButton(
             onClick = onGoBack,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(16.dp, 35.dp)
+                .padding(16.dp, 45.dp)
                 .size(48.dp),
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         ) {
