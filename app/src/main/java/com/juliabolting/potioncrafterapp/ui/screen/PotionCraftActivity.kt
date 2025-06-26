@@ -24,8 +24,7 @@ class PotionCraftActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PotionCrafterAppTheme {
-                PotionCraftAppScreen(onCrafted = {
-                })
+                //PotionCraftAppScreen(onGoBack = { currentScreen.value = "main")
             }
         }
     }

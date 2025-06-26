@@ -7,22 +7,30 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.juliabolting.potioncrafterapp.ui.screen.InventoryScreen
 import com.juliabolting.potioncrafterapp.ui.screen.PotionCraftActivity
+import com.juliabolting.potioncrafterapp.ui.screen.PotionCraftAppScreen
 import com.juliabolting.potioncrafterapp.ui.theme.PotionCrafterAppTheme
+
+val MedievalFont = FontFamily(Font(R.font.medieval_sharp))
 
 /**
  * Activity principal do aplicativo PotionCrafter.
@@ -52,12 +60,17 @@ class MainActivity : ComponentActivity() {
                             playerName = playerName,
                             onGoToInventory = { currentScreen.value = "inventory" },
                             onGoToPotionCraft = {
-                                startActivity(Intent(this, PotionCraftActivity::class.java))
+                                currentScreen.value = "potion"
                             },
                             onGoToRecipeBook = { currentScreen.value = "recipebook" }
                         )
                         "inventory" -> InventoryScreen()
-                        "recipebook" -> RecipeBookScreen()
+                        "recipebook" -> RecipeBookScreen(
+                            onGoBack = { currentScreen.value = "main" }
+                        )
+                        "potion" -> PotionCraftAppScreen (
+                            onGoBack = { currentScreen.value = "main" }
+                        )
                     }
                 }
             }
@@ -80,57 +93,107 @@ fun MainScreen(
     onGoToPotionCraft: () -> Unit,
     onGoToRecipeBook: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Imagem de fundo da tela principal
-        Image(
-            painter = painterResource(id = R.drawable.fundo_potion),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
+        // Título centralizado na parte superior
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Center,
+                .fillMaxWidth()
+                .padding(top = 48.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = stringResource(R.string.bem_vindo_mestre, playerName),
-                style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(bottom = 16.dp),
+                style = MaterialTheme.typography.headlineMedium.copy(
+                    fontFamily = MedievalFont,
+                    fontSize = 28.sp
+                ),
+                color = MaterialTheme.colorScheme.primary
             )
 
             Text(
                 text = stringResource(R.string.o_que_deseja_fazer_na_sua_jornada_alqu_mica),
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontFamily = MedievalFont,
+                    fontSize = 18.sp
+                ),
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(bottom = 32.dp)
+                modifier = Modifier.padding(top = 8.dp)
             )
+        }
 
+        // Animação Lottie entre o label e os botões
+        val composition by rememberLottieComposition(LottieCompositionSpec.Asset("potionGIF.json"))
+        LottieAnimation(
+            composition = composition,
+            iterations = LottieConstants.IterateForever,
+            modifier = Modifier
+                .size(300.dp) // Ajuste o tamanho conforme necessário
+                .padding(vertical = 16.dp)
+        )
+
+        // Botões na parte inferior
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 48.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Botão para criar nova poção
+            Text(
+                text = "Criar Poção",
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontFamily = MedievalFont,
+                    fontSize = 16.sp,
+                    color = Color(0xFF8E24AA)
+                ),
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
             Button(
                 onClick = { onGoToPotionCraft() },
                 modifier = Modifier
                     .fillMaxWidth(0.7f)
-                    .padding(bottom = 12.dp),
+                    .padding(bottom = 16.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8E24AA))
             ) {
                 Text(stringResource(R.string.criar_nova_po_o))
             }
 
+            // Botão para ver ingredientes
+            Text(
+                text = "Inventário",
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontFamily = MedievalFont,
+                    fontSize = 16.sp,
+                    color = Color(0xFF43A047)
+                ),
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
             Button(
                 onClick = { onGoToInventory() },
                 modifier = Modifier
                     .fillMaxWidth(0.7f)
-                    .padding(bottom = 12.dp),
+                    .padding(bottom = 16.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF43A047))
             ) {
                 Text(stringResource(R.string.ver_ingredientes))
             }
 
+            // Botão para consultar grimório
+            Text(
+                text = "Grimório",
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontFamily = MedievalFont,
+                    fontSize = 16.sp,
+                    color = Color(0xFF1E88E5)
+                ),
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
             Button(
                 onClick = { onGoToRecipeBook() },
                 modifier = Modifier.fillMaxWidth(0.7f),

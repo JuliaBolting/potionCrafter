@@ -1,17 +1,24 @@
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import com.juliabolting.potioncrafterapp.MainActivity
 import com.juliabolting.potioncrafterapp.R
 import com.juliabolting.potioncrafterapp.data.database.AppDatabase
 import com.juliabolting.potioncrafterapp.data.model.RecipeWithIngredients
@@ -25,7 +32,7 @@ import kotlinx.coroutines.launch
  * [generatePotionReport] para criar um PDF com todas as receitas e seus ingredientes.
  */
 @Composable
-fun RecipeBookScreen() {
+fun RecipeBookScreen(onGoBack: () -> Unit) {
     val context = LocalContext.current
     val db = remember { AppDatabase.getInstance(context) }
     val recipeDao = db.recipeDao()
@@ -54,7 +61,7 @@ fun RecipeBookScreen() {
             },
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(16.dp)
+                .padding(top = 30.dp, end = 16.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.Download,
@@ -77,7 +84,7 @@ fun RecipeBookScreen() {
                 ),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(top = 32.dp, bottom = 24.dp)
+                    .padding(top = 64.dp, bottom = 24.dp)
             )
 
             // Caso não haja receitas cadastradas
@@ -123,6 +130,22 @@ fun RecipeBookScreen() {
                     }
                 }
             }
+        }
+
+        // FloatingActionButton para voltar à MainActivity
+        FloatingActionButton(
+            onClick = onGoBack,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp, 35.dp)
+                .size(48.dp),
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Voltar para a tela principal",
+                tint = MaterialTheme.colorScheme.onSurface
+            )
         }
     }
 }
