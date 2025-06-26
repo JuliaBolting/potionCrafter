@@ -2,331 +2,331 @@
   {
     "nome": "Raiz de Mandrágora",
     "descricao": "Conhecida por seus gritos e propriedades mágicas.",
-    "imagem": "mandragora.png",
+    "imagem": "mandragora",
     "raridade": "Raro"
   },
   {
     "nome": "Lágrima de Fada",
     "descricao": "Essência pura de energia mística.",
-    "imagem": "lagrima_fada.png",
+    "imagem": "lagrima_fada",
     "raridade": "Épico"
   },
   {
     "nome": "Escama de Dragão",
     "descricao": "Reforça resistência e coragem.",
-    "imagem": "escama_dragao.png",
+    "imagem": "escama_dragao",
     "raridade": "Lendário"
   },
   {
     "nome": "Pó de Pixie",
     "descricao": "Dá um brilho cintilante e um toque de alegria.",
-    "imagem": "po_pixie.png",
+    "imagem": "po_pixie",
     "raridade": "Comum"
   },
   {
     "nome": "Cabelo de Unicórnio",
     "descricao": "Purifica e traz boa sorte.",
-    "imagem": "cabelo_unicornio.png",
+    "imagem": "cabelo_unicornio",
     "raridade": "Lendário"
   },
   {
     "nome": "Olho de Gárgula",
     "descricao": "Concede visão noturna e proteção contra maldições.",
-    "imagem": "olho_gargula.png",
+    "imagem": "olho_gargula",
     "raridade": "Raro"
   },
   {
     "nome": "Chifre de Grifo",
     "descricao": "Aumenta a velocidade e a agilidade.",
-    "imagem": "chifre_grifo.png",
+    "imagem": "chifre_grifo",
     "raridade": "Épico"
   },
   {
     "nome": "Asa de Morcego Vampiro",
     "descricao": "Permite voar por curtos períodos e suga energia.",
-    "imagem": "asa_morcego_vampiro.png",
+    "imagem": "asa_morcego_vampiro",
     "raridade": "Incomum"
   },
   {
     "nome": "Dente de Lobisomem",
     "descricao": "Aumenta a força física e os instintos selvagens.",
-    "imagem": "dente_lobisomem.png",
+    "imagem": "dente_lobisomem",
     "raridade": "Raro"
   },
   {
     "nome": "Pena de Fênix",
     "descricao": "Garante renascimento e cura rápida.",
-    "imagem": "pena_fenix.png",
+    "imagem": "pena_fenix",
     "raridade": "Lendário"
   },
   {
     "nome": "Muco de Lesma Gigante",
     "descricao": "Causa lentidão e escorregões.",
-    "imagem": "muco_lesma_gigante.png",
+    "imagem": "muco_lesma_gigante",
     "raridade": "Comum"
   },
   {
     "nome": "Pele de Serpente Marinha",
     "descricao": "Permite respirar debaixo d'água e deslizar com fluidez.",
-    "imagem": "pele_serpente_marinha.png",
+    "imagem": "pele_serpente_marinha",
     "raridade": "Raro"
   },
   {
     "nome": "Gema de Cristal de Mana",
     "descricao": "Fonte concentrada de energia mágica.",
-    "imagem": "gema_mana.png",
+    "imagem": "gema_mana",
     "raridade": "Épico"
   },
   {
     "nome": "Flor de Lótus Lunar",
     "descricao": "Floresce apenas à luz da lua, trazendo calma e sabedoria.",
-    "imagem": "flor_lotus_lunar.png",
+    "imagem": "flor_lotus_lunar",
     "raridade": "Incomum"
   },
   {
     "nome": "Sangue de Troll",
     "descricao": "Regenera ferimentos e endurece a pele.",
-    "imagem": "sangue_troll.png",
+    "imagem": "sangue_troll",
     "raridade": "Raro"
   },
   {
     "nome": "Concha de Sereia",
     "descricao": "Cria melodias encantadoras e atrai criaturas aquáticas.",
-    "imagem": "concha_sereia.png",
+    "imagem": "concha_sereia",
     "raridade": "Épico"
   },
   {
     "nome": "Asa de Vespa Gigante",
     "descricao": "Confere agilidade e um zumbido irritante.",
-    "imagem": "asa_vespa_gigante.png",
+    "imagem": "asa_vespa_gigante",
     "raridade": "Comum"
   },
   {
     "nome": "Espectro Engarrafado",
     "descricao": "Um eco de uma alma perdida, capaz de assustar.",
-    "imagem": "espectro_engarrafado.png",
+    "imagem": "espectro_engarrafado",
     "raridade": "Incomum"
   },
   {
     "nome": "Coração de Golem",
     "descricao": "Dá vida a objetos inanimados.",
-    "imagem": "coracao_golem.png",
+    "imagem": "coracao_golem",
     "raridade": "Épico"
   },
   {
     "nome": "Teia de Aranha Gigante",
     "descricao": "Perfeita para prender inimigos ou criar armadilhas pegajosas.",
-    "imagem": "teia_aranha_gigante.png",
+    "imagem": "teia_aranha_gigante",
     "raridade": "Comum"
   },
   {
     "nome": "Olho de Beholder",
     "descricao": "Dispara raios mágicos e causa confusão.",
-    "imagem": "olho_beholder.png",
+    "imagem": "olho_beholder",
     "raridade": "Lendário"
   },
   {
     "nome": "Gengibre de Gnome",
     "descricao": "Aumenta a resistência a venenos e o bom humor.",
-    "imagem": "gengibre_gnome.png",
+    "imagem": "gengibre_gnome",
     "raridade": "Incomum"
   },
   {
     "nome": "Pelo de Urso Coruja",
     "descricao": "Melhora a audição e a visão noturna.",
-    "imagem": "pelo_urso_coruja.png",
+    "imagem": "pelo_urso_coruja",
     "raridade": "Raro"
   },
   {
     "nome": "Estrela Cadente Solidificada",
     "descricao": "Um fragmento de desejo e sorte cósmica.",
-    "imagem": "estrela_cadente_solidificada.png",
+    "imagem": "estrela_cadente_solidificada",
     "raridade": "Épico"
   },
   {
     "nome": "Cristal de Eco",
     "descricao": "Amplifica sons e cria ilusões auditivas.",
-    "imagem": "cristal_eco.png",
+    "imagem": "cristal_eco",
     "raridade": "Incomum"
   },
   {
     "nome": "Pó de Cogumelo Brilhante",
     "descricao": "Ilumina ambientes e causa alucinações leves.",
-    "imagem": "po_cogumelo_brilhante.png",
+    "imagem": "po_cogumelo_brilhante",
     "raridade": "Comum"
   },
   {
     "nome": "Fragmento de Armadura Fantasma",
     "descricao": "Concede resistência a ataques e sussurros do passado.",
-    "imagem": "fragmento_armadura_fantasma.png",
+    "imagem": "fragmento_armadura_fantasma",
     "raridade": "Raro"
   },
   {
     "nome": "Rosa Sangrenta",
     "descricao": "Cura ferimentos, mas deixa um rastro de espinhos.",
-    "imagem": "rosa_sangrenta.png",
+    "imagem": "rosa_sangrenta",
     "raridade": "Incomum"
   },
   {
     "nome": "Essência de Vento Ventania",
     "descricao": "Controla pequenas rajadas de vento e acelera movimentos.",
-    "imagem": "essencia_vento.png",
+    "imagem": "essencia_vento",
     "raridade": "Comum"
   },
   {
     "nome": "Escama de Basilisco",
     "descricao": "Converte seres vivos em pedra, por um breve período.",
-    "imagem": "escama_basilisco.png",
+    "imagem": "escama_basilisco",
     "raridade": "Lendário"
   },
   {
     "nome": "Língua de Sapo Curandeiro",
     "descricao": "Cura doenças e neutraliza venenos.",
-    "imagem": "lingua_sapo_curandeiro.png",
+    "imagem": "lingua_sapo_curandeiro",
     "raridade": "Incomum"
   },
   {
     "nome": "Cabelo de Harpia",
     "descricao": "Atrai a atenção e causa distração com canções dissonantes.",
-    "imagem": "cabelo_harpia.png",
+    "imagem": "cabelo_harpia",
     "raridade": "Comum"
   },
   {
     "nome": "Alma de Elemental de Fogo Aprisionada",
     "descricao": "Causa explosões e manipula o fogo.",
-    "imagem": "alma_elemental_fogo.png",
+    "imagem": "alma_elemental_fogo",
     "raridade": "Épico"
   },
   {
     "nome": "Folha de Carvalho Ancestral",
     "descricao": "Concede sabedoria e conexão com a natureza.",
-    "imagem": "folha_carvalho_ancestral.png",
+    "imagem": "folha_carvalho_ancestral",
     "raridade": "Raro"
   },
   {
     "nome": "Areia do Tempo",
     "descricao": "Acelera ou desacelera pequenos eventos.",
-    "imagem": "areia_tempo.png",
+    "imagem": "areia_tempo",
     "raridade": "Épico"
   },
   {
     "nome": "Lagrimas de Banshee",
     "descricao": "Provoca medo e desespero.",
-    "imagem": "lagrimas_banshee.png",
+    "imagem": "lagrimas_banshee",
     "raridade": "Raro"
   },
   {
     "nome": "Pó de Meteoro",
     "descricao": "Concede força e resistência por um breve período.",
-    "imagem": "po_meteoro.png",
+    "imagem": "po_meteoro",
     "raridade": "Incomum"
   },
   {
     "nome": "Gota de Orvalho Celestial",
     "descricao": "Pura e energizante, revigora corpo e mente.",
-    "imagem": "gota_orvalho_celestial.png",
+    "imagem": "gota_orvalho_celestial",
     "raridade": "Raro"
   },
   {
     "nome": "Osso de Ciclope",
     "descricao": "Aumenta a mira e a força de arremesso.",
-    "imagem": "osso_ciclope.png",
+    "imagem": "osso_ciclope",
     "raridade": "Incomum"
   },
   {
     "nome": "Escama de Kraken",
     "descricao": "Concede a habilidade de controlar a água e invocar tentáculos.",
-    "imagem": "escama_kraken.png",
+    "imagem": "escama_kraken",
     "raridade": "Lendário"
   },
   {
     "nome": "Chifre de Minotauro",
     "descricao": "Aumenta a força bruta e a capacidade de quebrar barreiras.",
-    "imagem": "chifre_minotauro.png",
+    "imagem": "chifre_minotauro",
     "raridade": "Raro"
   },
   {
     "nome": "Cristal de Sonho",
     "descricao": "Permite entrar nos sonhos alheios ou criar ilusões realistas.",
-    "imagem": "cristal_sonho.png",
+    "imagem": "cristal_sonho",
     "raridade": "Épico"
   },
   {
     "nome": "Pena de Hipogrifo",
     "descricao": "Concede agilidade e a capacidade de saltos extraordinários.",
-    "imagem": "pena_hipogrifo.png",
+    "imagem": "pena_hipogrifo",
     "raridade": "Incomum"
   },
   {
     "nome": "Cera de Orelha de Ogro",
     "descricao": "Causa surdez temporária e um cheiro desagradável.",
-    "imagem": "cera_orelha_ogro.png",
+    "imagem": "cera_orelha_ogro",
     "raridade": "Comum"
   },
   {
     "nome": "Espinho de Ouriço Gigante",
     "descricao": "Causa dor e pode ser usado como projétil afiado.",
-    "imagem": "espinho_ourico_gigante.png",
+    "imagem": "espinho_ourico_gigante",
     "raridade": "Comum"
   },
   {
     "nome": "Vagem de Feijão Mágico",
     "descricao": "Pode crescer em uma haste gigante ou conceder desejos inusitados.",
-    "imagem": "vagem_feijao_magico.png",
+    "imagem": "vagem_feijao_magico",
     "raridade": "Épico"
   },
   {
     "nome": "Névoa de Pântano Encantado",
     "descricao": "Causa desorientação e visões estranhas.",
-    "imagem": "nevoa_pantano_encantado.png",
+    "imagem": "nevoa_pantano_encantado",
     "raridade": "Incomum"
   },
   {
     "nome": "Pó de Cinzas Vulcânicas",
     "descricao": "Causa calor intenso e erupções menores.",
-    "imagem": "po_cinzas_vulcanicas.png",
+    "imagem": "po_cinzas_vulcanicas",
     "raridade": "Comum"
   },
   {
     "nome": "Cabelo de Bruxa Anciã",
     "descricao": "Amplifica feitiços e pode causar efeitos colaterais inesperados.",
-    "imagem": "cabelo_bruxa_ancia.png",
+    "imagem": "cabelo_bruxa_ancia",
     "raridade": "Raro"
   },
   {
     "nome": "Chifre de Sátiro",
     "descricao": "Inspira dança e alegria contagiante.",
-    "imagem": "chifre_satiro.png",
+    "imagem": "chifre_satiro",
     "raridade": "Incomum"
   },
   {
     "nome": "Pele de Camaleão Mágico",
     "descricao": "Permite camuflagem e mudança de cor.",
-    "imagem": "pele_camaleao_magico.png",
+    "imagem": "pele_camaleao_magico",
     "raridade": "Raro"
   },
   {
     "nome": "Lágrima de Estátua Viva",
     "descricao": "Traz vida a objetos e causa emoções intensas.",
-    "imagem": "lagrima_estatua_viva.png",
+    "imagem": "lagrima_estatua_viva",
     "raridade": "Épico"
   },
   {
     "nome": "Bambu dos Suspiros",
     "descricao": "Concede um breve momento de paz e reflexão.",
-    "imagem": "bambu_suspiros.png",
+    "imagem": "bambu_suspiros",
     "raridade": "Incomum"
   },
   {
     "nome": "Musgo de Gruta Proibida",
     "descricao": "Libera gases soporíferos e esconde passagens secretas.",
-    "imagem": "musgo_gruta_proibida.png",
+    "imagem": "musgo_gruta_proibida",
     "raridade": "Raro"
   },
   {
     "nome": "Casca de Tartaruga Anciã",
     "descricao": "Oferece proteção e longevidade.",
-    "imagem": "casca_tartaruga_ancia.png",
+    "imagem": "casca_tartaruga_ancia",
     "raridade": "Épico"
   }
 ]

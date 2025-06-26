@@ -65,16 +65,16 @@ public final class PotionDAO_Impl implements PotionDAO {
   }
 
   @Override
-  public Object insert(final Potion potion, final Continuation<? super Unit> $completion) {
+  public Object insert(final Potion potion, final Continuation<? super Unit> arg1) {
     if (potion == null) throw new NullPointerException();
     return DBUtil.performSuspending(__db, false, true, (_connection) -> {
       __insertAdapterOfPotion.insert(_connection, potion);
       return Unit.INSTANCE;
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object getAllPotions(final Continuation<? super List<Potion>> $completion) {
+  public Object getAllPotions(final Continuation<? super List<Potion>> arg0) {
     final String _sql = "SELECT * FROM potion";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
@@ -123,7 +123,7 @@ public final class PotionDAO_Impl implements PotionDAO {
       } finally {
         _stmt.close();
       }
-    }, $completion);
+    }, arg0);
   }
 
   @NonNull

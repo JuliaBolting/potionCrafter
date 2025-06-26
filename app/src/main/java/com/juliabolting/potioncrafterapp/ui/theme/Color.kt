@@ -2,7 +2,7 @@ package com.juliabolting.potioncrafterapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val primary = Color(0xFFD0BCFF)
+val primary = Color(0xFF4100DE)
 val background = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 

@@ -67,15 +67,15 @@ public final class RecipeDAO_Impl implements RecipeDAO {
   }
 
   @Override
-  public Object insert(final Recipe recipe, final Continuation<? super Long> $completion) {
+  public Object insert(final Recipe recipe, final Continuation<? super Long> arg1) {
     if (recipe == null) throw new NullPointerException();
     return DBUtil.performSuspending(__db, false, true, (_connection) -> {
       return __insertAdapterOfRecipe.insertAndReturnId(_connection, recipe);
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object getAllRecipes(final Continuation<? super List<Recipe>> $completion) {
+  public Object getAllRecipes(final Continuation<? super List<Recipe>> arg0) {
     final String _sql = "SELECT * FROM recipe";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
@@ -114,12 +114,12 @@ public final class RecipeDAO_Impl implements RecipeDAO {
       } finally {
         _stmt.close();
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override
   public Object getAllRecipesWithIngredients(
-      final Continuation<? super List<RecipeWithIngredients>> $completion) {
+      final Continuation<? super List<RecipeWithIngredients>> arg0) {
     final String _sql = "SELECT * FROM recipe";
     return DBUtil.performSuspending(__db, true, true, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
@@ -174,7 +174,7 @@ public final class RecipeDAO_Impl implements RecipeDAO {
       } finally {
         _stmt.close();
       }
-    }, $completion);
+    }, arg0);
   }
 
   @NonNull

@@ -9,6 +9,7 @@ import androidx.room.util.SQLiteStatementUtil;
 import androidx.sqlite.SQLiteStatement;
 import com.juliabolting.potioncrafterapp.data.model.Player;
 import java.lang.Class;
+import java.lang.Long;
 import java.lang.NullPointerException;
 import java.lang.Object;
 import java.lang.Override;
@@ -83,11 +84,10 @@ public final class PlayerDAO_Impl implements PlayerDAO {
   }
 
   @Override
-  public Object insert(final Player player, final Continuation<? super Unit> $completion) {
+  public Object insert(final Player player, final Continuation<? super Long> $completion) {
     if (player == null) throw new NullPointerException();
     return DBUtil.performSuspending(__db, false, true, (_connection) -> {
-      __insertAdapterOfPlayer.insert(_connection, player);
-      return Unit.INSTANCE;
+      return __insertAdapterOfPlayer.insertAndReturnId(_connection, player);
     }, $completion);
   }
 

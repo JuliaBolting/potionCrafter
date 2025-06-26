@@ -41,4 +41,11 @@
     <string name="forjar_destino">⚗️ Forjar Destino!</string>
     <string name="novo_aventureiro">⚔️ Novo Aventureiro</string>
     <string name="continuar_jornada">📜 Continuar Jornada</string>
+    <string name="aventureiro">Aventureiro</string>
+    <string name="bem_vindo_mestre">🧙‍♂️ Bem-vindo, Mestre %1$s!</string>
+    <string name="o_que_deseja_fazer_na_sua_jornada_alqu_mica">O que deseja fazer na sua jornada alquímica?</string>
+    <string name="criar_nova_po_o">🔮 Criar Nova Poção</string>
+    <string name="ver_ingredientes">🌿 Ver Ingredientes</string>
+    <string name="consultar_grim_rio_de_receitas">📜 Consultar Grimório de Receitas</string>
+
 </resources>

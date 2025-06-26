@@ -14,6 +14,7 @@ import com.juliabolting.potioncrafterapp.data.database.AppDatabase
 import com.juliabolting.potioncrafterapp.data.model.Player
 import kotlinx.coroutines.launch
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.view.animation.LinearInterpolator
 import android.widget.TextView
 
@@ -55,9 +56,15 @@ class NewPlayerActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             val name = editName.text.toString()
             if (name.isNotBlank()) {
-                val newPlayer = Player(id = 1, name = name, level = 1, xp = 0)
+                val newPlayer = Player(name = name, level = 1, xp = 0) // não define o ID
                 lifecycleScope.launch {
-                    playerDao.insert(newPlayer) // salva no banco
+                    val playerId = playerDao.insert(newPlayer) // retorna o ID gerado
+
+                    // Salva o ID no SharedPreferences
+                    val sharedPref = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+                    sharedPref.edit().putInt("player_id", playerId.toInt()).apply()
+
+                    // Vai para a MainActivity
                     val intent = Intent(this@NewPlayerActivity, MainActivity::class.java)
                     intent.putExtra("playerName", name)
                     startActivity(intent)

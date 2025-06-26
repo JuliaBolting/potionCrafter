@@ -21,7 +21,7 @@ interface PlayerDAO {
      * @param player O jogador a ser inserido.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(player: Player)
+    suspend fun insert(player: Player): Long
 
     /**
      * Recupera um jogador pelo seu ID.

@@ -3,6 +3,7 @@ package com.juliabolting.potioncrafterapp
 import RecipeBookScreen
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.juliabolting.potioncrafterapp.ui.screen.InventoryScreen
 import com.juliabolting.potioncrafterapp.ui.screen.PotionCraftActivity
@@ -34,7 +36,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Obtém o nome do jogador enviado pela activity anterior, ou usa padrão
-        val playerName = intent.getStringExtra("player_name") ?: "Aventureiro"
+        val playerName = intent.getStringExtra("player_name") ?: getString(R.string.aventureiro)
+        Log.d("PotionCrafter", "playerName: ${playerName}")
 
         enableEdgeToEdge()
 
@@ -82,7 +85,7 @@ fun MainScreen(
     ) {
         // Imagem de fundo da tela principal
         Image(
-            painter = painterResource(id = R.drawable.bg_wood),
+            painter = painterResource(id = R.drawable.fundo_potion),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -95,14 +98,14 @@ fun MainScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "🧙‍♂️ Bem-vindo, Mestre $playerName!",
+                text = stringResource(R.string.bem_vindo_mestre, playerName),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(bottom = 16.dp),
             )
 
             Text(
-                text = "O que deseja fazer na sua jornada alquímica?",
+                text = stringResource(R.string.o_que_deseja_fazer_na_sua_jornada_alqu_mica),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.padding(bottom = 32.dp)
@@ -115,7 +118,7 @@ fun MainScreen(
                     .padding(bottom = 12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8E24AA))
             ) {
-                Text("🔮 Criar Nova Poção")
+                Text(stringResource(R.string.criar_nova_po_o))
             }
 
             Button(
@@ -125,7 +128,7 @@ fun MainScreen(
                     .padding(bottom = 12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF43A047))
             ) {
-                Text("🌿 Ver Ingredientes")
+                Text(stringResource(R.string.ver_ingredientes))
             }
 
             Button(
@@ -133,7 +136,7 @@ fun MainScreen(
                 modifier = Modifier.fillMaxWidth(0.7f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1E88E5))
             ) {
-                Text("📜 Consultar Grimório de Receitas")
+                Text(stringResource(R.string.consultar_grim_rio_de_receitas))
             }
         }
     }

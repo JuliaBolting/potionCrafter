@@ -40,5 +40,11 @@
     <string name="digite_seu_nome_m_stico">Enter your mystical name…</string>
     <string name="forjar_destino">⚗️ Forge Destiny!</string>
     <string name="novo_aventureiro">⚔️ New Adventurer</string>
-    <string name="continuar_jornada">📜 Continue Journey</string>
+    <string name="continuar_jornada">📜 Continue Journey</string><string name="aventureiro">Adventurer</string>
+    <string name="bem_vindo_mestre">🧙‍♂️ Welcome, Master %1$s!</string>
+    <string name="o_que_deseja_fazer_na_sua_jornada_alqu_mica">What would you like to do on your alchemical journey?</string>
+    <string name="criar_nova_po_o">🔮 Create New Potion</string>
+    <string name="ver_ingredientes">🌿 View Ingredients</string>
+    <string name="consultar_grim_rio_de_receitas">📜 Consult Recipe Book</string>
+
 </resources>

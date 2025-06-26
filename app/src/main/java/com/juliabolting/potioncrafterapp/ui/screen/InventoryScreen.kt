@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
@@ -102,17 +103,31 @@ fun IngredientCard(ingredient: Ingredient) {
             modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val painter = rememberAsyncImagePainter(
-                model = ingredient.imagem.ifBlank { null }
-            )
+            val context = LocalContext.current
+            val imageId = remember(ingredient.imagem) {
+                context.resources.getIdentifier(ingredient.imagem, "drawable", context.packageName)
+            }
 
-            Image(
-                painter = painter,
-                contentDescription = stringResource(R.string.imagem_do_ingrediente),
-                modifier = Modifier
-                    .size(64.dp)
-                    .padding(end = 12.dp)
-            )
+            if (imageId != 0) {
+                val painter = painterResource(id = imageId)
+
+                Image(
+                    painter = painter,
+                    contentDescription = stringResource(R.string.imagem_do_ingrediente),
+                    modifier = Modifier
+                        .size(64.dp)
+                        .padding(end = 12.dp)
+                )
+            } else {
+                // imagem padrão opcional
+                Text(
+                    text = "🖼️",
+                    modifier = Modifier
+                        .size(64.dp)
+                        .padding(end = 12.dp),
+                    color = Color.Gray
+                )
+            }
 
             Column {
                 Text(

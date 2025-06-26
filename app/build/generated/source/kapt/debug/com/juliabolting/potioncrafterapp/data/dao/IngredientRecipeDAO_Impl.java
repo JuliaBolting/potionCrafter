@@ -47,17 +47,17 @@ public final class IngredientRecipeDAO_Impl implements IngredientRecipeDAO {
 
   @Override
   public Object insert(final IngredienteReceitaCrossRef crossRef,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     if (crossRef == null) throw new NullPointerException();
     return DBUtil.performSuspending(__db, false, true, (_connection) -> {
       __insertAdapterOfIngredienteReceitaCrossRef.insert(_connection, crossRef);
       return Unit.INSTANCE;
-    }, $completion);
+    }, arg1);
   }
 
   @Override
   public Object getIngredientsForRecipe(final int receitaId,
-      final Continuation<? super List<IngredienteReceitaCrossRef>> $completion) {
+      final Continuation<? super List<IngredienteReceitaCrossRef>> arg1) {
     final String _sql = "SELECT * FROM IngredienteReceitaCrossRef WHERE receitaId = ?";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
@@ -80,7 +80,7 @@ public final class IngredientRecipeDAO_Impl implements IngredientRecipeDAO {
       } finally {
         _stmt.close();
       }
-    }, $completion);
+    }, arg1);
   }
 
   @NonNull

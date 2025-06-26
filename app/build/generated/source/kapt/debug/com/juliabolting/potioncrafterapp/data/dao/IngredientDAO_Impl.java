@@ -65,16 +65,16 @@ public final class IngredientDAO_Impl implements IngredientDAO {
   }
 
   @Override
-  public Object insert(final Ingredient ingredient, final Continuation<? super Unit> $completion) {
+  public Object insert(final Ingredient ingredient, final Continuation<? super Unit> arg1) {
     if (ingredient == null) throw new NullPointerException();
     return DBUtil.performSuspending(__db, false, true, (_connection) -> {
       __insertAdapterOfIngredient.insert(_connection, ingredient);
       return Unit.INSTANCE;
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object getAllIngredients(final Continuation<? super List<Ingredient>> $completion) {
+  public Object getAllIngredients(final Continuation<? super List<Ingredient>> arg0) {
     final String _sql = "SELECT * FROM ingredient";
     return DBUtil.performSuspending(__db, true, false, (_connection) -> {
       final SQLiteStatement _stmt = _connection.prepare(_sql);
@@ -120,7 +120,7 @@ public final class IngredientDAO_Impl implements IngredientDAO {
       } finally {
         _stmt.close();
       }
-    }, $completion);
+    }, arg0);
   }
 
   @NonNull

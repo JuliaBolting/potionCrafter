@@ -1,0 +1,332 @@
+[
+  {
+    "nome": "Mandrake Root",
+    "descricao": "Known for its screams and magical properties.",
+    "imagem": "mandragora",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Fairy Tear",
+    "descricao": "Pure essence of mystical energy.",
+    "imagem": "lagrima_fada",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Dragon Scale",
+    "descricao": "Enhances resistance and courage.",
+    "imagem": "escama_dragao",
+    "raridade": "Legendary"
+  },
+  {
+    "nome": "Pixie Dust",
+    "descricao": "Gives a sparkling shine and a touch of joy.",
+    "imagem": "po_pixie",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Unicorn Hair",
+    "descricao": "Purifies and brings good luck.",
+    "imagem": "cabelo_unicornio",
+    "raridade": "Legendary"
+  },
+  {
+    "nome": "Gargoyle Eye",
+    "descricao": "Grants night vision and protection against curses.",
+    "imagem": "olho_gargula",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Griffin Horn",
+    "descricao": "Increases speed and agility.",
+    "imagem": "chifre_grifo",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Vampire Bat Wing",
+    "descricao": "Allows flying for short periods and drains energy.",
+    "imagem": "asa_morcego_vampiro",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Werewolf Fang",
+    "descricao": "Boosts physical strength and wild instincts.",
+    "imagem": "dente_lobisomem",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Phoenix Feather",
+    "descricao": "Ensures rebirth and quick healing.",
+    "imagem": "pena_fenix",
+    "raridade": "Legendary"
+  },
+  {
+    "nome": "Giant Slug Mucus",
+    "descricao": "Causes slowness and slips.",
+    "imagem": "muco_lesma_gigante",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Sea Serpent Skin",
+    "descricao": "Allows breathing underwater and smooth gliding.",
+    "imagem": "pele_serpente_marinha",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Mana Crystal Gem",
+    "descricao": "Concentrated source of magical energy.",
+    "imagem": "gema_mana",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Lunar Lotus Flower",
+    "descricao": "Blooms only in moonlight, bringing calm and wisdom.",
+    "imagem": "flor_lotus_lunar",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Troll Blood",
+    "descricao": "Regenerates wounds and hardens the skin.",
+    "imagem": "sangue_troll",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Mermaid Shell",
+    "descricao": "Creates enchanting melodies and attracts aquatic creatures.",
+    "imagem": "concha_sereia",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Giant Wasp Wing",
+    "descricao": "Grants agility and an annoying buzz.",
+    "imagem": "asa_vespa_gigante",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Bottled Wraith",
+    "descricao": "An echo of a lost soul, capable of frightening.",
+    "imagem": "espectro_engarrafado",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Golem Heart",
+    "descricao": "Gives life to inanimate objects.",
+    "imagem": "coracao_golem",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Giant Spider Web",
+    "descricao": "Perfect for trapping enemies or creating sticky traps.",
+    "imagem": "teia_aranha_gigante",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Beholder Eye",
+    "descricao": "Fires magical rays and causes confusion.",
+    "imagem": "olho_beholder",
+    "raridade": "Legendary"
+  },
+  {
+    "nome": "Gnome Ginger",
+    "descricao": "Increases resistance to poisons and good mood.",
+    "imagem": "gengibre_gnome",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Owl Bear Fur",
+    "descricao": "Improves hearing and night vision.",
+    "imagem": "pelo_urso_coruja",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Solidified Shooting Star",
+    "descricao": "A fragment of wish and cosmic luck.",
+    "imagem": "estrela_cadente_solidificada",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Echo Crystal",
+    "descricao": "Amplifies sounds and creates auditory illusions.",
+    "imagem": "cristal_eco",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Glowing Mushroom Dust",
+    "descricao": "Lights up environments and causes mild hallucinations.",
+    "imagem": "po_cogumelo_brilhante",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Ghost Armor Fragment",
+    "descricao": "Grants resistance to attacks and whispers from the past.",
+    "imagem": "fragmento_armadura_fantasma",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Bleeding Rose",
+    "descricao": "Heals wounds but leaves a trail of thorns.",
+    "imagem": "rosa_sangrenta",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Windstorm Essence",
+    "descricao": "Controls small gusts of wind and speeds up movements.",
+    "imagem": "essencia_vento",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Basilisk Scale",
+    "descricao": "Turns living beings into stone for a short period.",
+    "imagem": "escama_basilisco",
+    "raridade": "Legendary"
+  },
+  {
+    "nome": "Healer Frog Tongue",
+    "descricao": "Cures diseases and neutralizes poisons.",
+    "imagem": "lingua_sapo_curandeiro",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Harpy Hair",
+    "descricao": "Attracts attention and causes distraction with dissonant songs.",
+    "imagem": "cabelo_harpia",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Trapped Fire Elemental Soul",
+    "descricao": "Causes explosions and manipulates fire.",
+    "imagem": "alma_elemental_fogo",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Ancient Oak Leaf",
+    "descricao": "Grants wisdom and connection with nature.",
+    "imagem": "folha_carvalho_ancestral",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Sand of Time",
+    "descricao": "Speeds up or slows down small events.",
+    "imagem": "areia_tempo",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Banshee Tears",
+    "descricao": "Causes fear and despair.",
+    "imagem": "lagrimas_banshee",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Meteor Dust",
+    "descricao": "Grants strength and resistance for a short period.",
+    "imagem": "po_meteoro",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Celestial Dew Drop",
+    "descricao": "Pure and energizing, revitalizes body and mind.",
+    "imagem": "gota_orvalho_celestial",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Cyclops Bone",
+    "descricao": "Increases aim and throwing strength.",
+    "imagem": "osso_ciclope",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Kraken Scale",
+    "descricao": "Grants the ability to control water and summon tentacles.",
+    "imagem": "escama_kraken",
+    "raridade": "Legendary"
+  },
+  {
+    "nome": "Minotaur Horn",
+    "descricao": "Increases brute strength and ability to break barriers.",
+    "imagem": "chifre_minotauro",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Dream Crystal",
+    "descricao": "Allows entering others' dreams or creating realistic illusions.",
+    "imagem": "cristal_sonho",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Hippogriff Feather",
+    "descricao": "Grants agility and the ability to make extraordinary leaps.",
+    "imagem": "pena_hipogrifo",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Ogre Earwax",
+    "descricao": "Causes temporary deafness and an unpleasant smell.",
+    "imagem": "cera_orelha_ogro",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Giant Hedgehog Spine",
+    "descricao": "Causes pain and can be used as a sharp projectile.",
+    "imagem": "espinho_ourico_gigante",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Magic Bean Pod",
+    "descricao": "Can grow into a giant stalk or grant unusual wishes.",
+    "imagem": "vagem_feijao_magico",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Enchanted Swamp Mist",
+    "descricao": "Causes disorientation and strange visions.",
+    "imagem": "nevoa_pantano_encantado",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Volcanic Ash Dust",
+    "descricao": "Causes intense heat and minor eruptions.",
+    "imagem": "po_cinzas_vulcanicas",
+    "raridade": "Common"
+  },
+  {
+    "nome": "Ancient Witch Hair",
+    "descricao": "Amplifies spells and can cause unexpected side effects.",
+    "imagem": "cabelo_bruxa_ancia",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Satyr Horn",
+    "descricao": "Inspires dance and contagious joy.",
+    "imagem": "chifre_satiro",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Magic Chameleon Skin",
+    "descricao": "Allows camouflage and color change.",
+    "imagem": "pele_camaleao_magico",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Living Statue Tear",
+    "descricao": "Brings life to objects and causes intense emotions.",
+    "imagem": "lagrima_estatua_viva",
+    "raridade": "Epic"
+  },
+  {
+    "nome": "Bamboo of Sighs",
+    "descricao": "Grants a brief moment of peace and reflection.",
+    "imagem": "bambu_suspiros",
+    "raridade": "Uncommon"
+  },
+  {
+    "nome": "Forbidden Cave Moss",
+    "descricao": "Releases soporific gases and hides secret passages.",
+    "imagem": "musgo_gruta_proibida",
+    "raridade": "Rare"
+  },
+  {
+    "nome": "Ancient Turtle Shell",
+    "descricao": "Offers protection and longevity.",
+    "imagem": "casca_tartaruga_ancia",
+    "raridade": "Epic"
+  }
+]

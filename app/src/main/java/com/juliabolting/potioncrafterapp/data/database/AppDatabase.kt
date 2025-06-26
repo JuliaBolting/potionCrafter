@@ -22,6 +22,7 @@ import com.juliabolting.potioncrafterapp.data.model.Recipe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 /**
  * Classe abstrata que representa o banco de dados do aplicativo PotionCrafter.
@@ -80,9 +81,10 @@ abstract class AppDatabase : RoomDatabase() {
                                 "AppDatabase",
                                 "Banco de dados criado! Inserindo ingredientes iniciais."
                             )
+                            val locale = Locale.getDefault().language
 
                             CoroutineScope(Dispatchers.IO).launch {
-                                val ingredients = loadInitialIngredients(context)
+                                val ingredients = loadInitialIngredients(context, locale)
                                 INSTANCE?.ingredientDao()?.apply {
                                     ingredients.forEach { insert(it) }
                                 }
@@ -97,12 +99,20 @@ abstract class AppDatabase : RoomDatabase() {
 
         /**
          * Carrega os ingredientes iniciais a partir do arquivo `ingredients.json` presente em assets.
+         * Leva em conta o idioma do usuário para escolher o arquivo json com os ingredientes.
          *
          * @param context Contexto da aplicação
          * @return Lista de [Ingredient] carregados do JSON
          */
-        fun loadInitialIngredients(context: Context): List<Ingredient> {
-            val inputStream = context.assets.open("ingredients.json")
+        fun loadInitialIngredients(context: Context, locale: String): List<Ingredient> {
+            val filename = when (locale) {
+                "en" -> "ingredients_en.json"
+                "pt" -> "ingredients.json"
+                "es" -> "ingredients_es.json"
+                else -> "ingredients.json"
+            }
+            Log.d("PotionCrafter", "3 Ingredientes filename: ${filename}")
+            val inputStream = context.assets.open(filename)
             val json = inputStream.bufferedReader().use { it.readText() }
             val gson = Gson()
             val type = object : TypeToken<List<Ingredient>>() {}.type
