@@ -30,3 +30,6 @@ out/
 
 # Build generated folders (app/build, etc)
 **/build/
+/app/build.gradle.kts
+/gradle/wrapper/gradle-wrapper.properties
+/gradle/libs.versions.toml
